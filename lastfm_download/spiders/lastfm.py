@@ -1,6 +1,6 @@
 import scrapy
 
-from lastfm_download.items import LastfmDownloadItem, ProductLoader
+from lastfm_download.items import Scrobble, ScrobbleLoader
 
 
 class LastfmSpider(scrapy.Spider):
@@ -26,7 +26,7 @@ class LastfmSpider(scrapy.Spider):
         page = response.meta['page']
         self.logger.info(f'Parsing page number {page}')
         for row in response.css('.chartlist-row'):
-            loader = ProductLoader(LastfmDownloadItem(), row)
+            loader = ScrobbleLoader(Scrobble(), row)
             loader.add_css('track', 'td.chartlist-name > a::attr(title)')
             loader.add_css('artist', 'td.chartlist-artist > a::attr(title)')
             loader.add_css('timestamp', 'td.chartlist-timestamp > span::attr(title)')
