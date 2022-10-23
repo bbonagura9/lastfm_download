@@ -1,4 +1,5 @@
 import scrapy
+from datetime import datetime
 
 from lastfm_download.items import Scrobble, ScrobbleLoader
 
@@ -7,10 +8,12 @@ class LastfmSpider(scrapy.Spider):
     name = 'lastfm'
     allowed_domains = ['last.fm']
 
-    def __init__(self, username, start_page=1, *args, **kwargs):
+    def __init__(self, username, start_page=1, scrap_until=None, *args, **kwargs):
         super(LastfmSpider, self).__init__(*args, **kwargs)
         self.username = username
         self.start_page = start_page
+        if scrap_until:
+            self.scrap_until = datetime.strptime(scrap_until, '%Y-%m-%d')
 
     def build_request(self, page):
         return scrapy.Request(

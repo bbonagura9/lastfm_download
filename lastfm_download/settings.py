@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = "lastfm_download.spiders"
 # USER_AGENT = 'lastfm_download (+http://www.yourdomain.com)'
 
 #  Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
 
 #  Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 4
@@ -58,15 +58,15 @@ CONCURRENT_REQUESTS = 4
 
 #  Enable or disable extensions
 #  See https://docs.scrapy.org/en/latest/topics/extensions.html
-EXTENSIONS = {
-    'scrapy.extensions.telnet.TelnetConsole': None
-}
+# EXTENSIONS = {
+    # 'scrapy.extensions.telnet.TelnetConsole': None
+# }
 
 #  Configure item pipelines
 #  See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#     'lastfm_download.pipelines.LastfmDownloadPipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'lastfm_download.pipelines.ScrapUntilPipeline': 300,
+}
 
 #  Enable and configure the AutoThrottle extension (disabled by default)
 #  See https://docs.scrapy.org/en/latest/topics/autothrottle.html
