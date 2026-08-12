@@ -6,16 +6,24 @@ In a paranoid thought of Last.fm going down and losing all my data since 2004, I
 
 - Python >= 3.7, <4
 
-## Installing
+## Setup
 
-Create your virtualenv and then:
+Create the sqlite3 database with:
 
-```
-git clone https://github.com/bbonagura9/lastfm_download.git
-cd lastfm_download
-poetry install
+`sqlite3 tracks.db`
+
+Then paste:
+
+```sql
+CREATE TABLE tracks (
+    timestamp INTEGER NOT NULL,
+    artist TEXT NOT NULL,
+    album TEXT NOT NULL,
+    name TEXT NOT NULL
+);
+CREATE INDEX idx_tracks_timestamp ON tracks (timestamp);
 ```
 
 ## Running
 
-`scrapy crawl lastfm -a username=<your-lastfm-username>`
+`LASTFM_API_KEY=your-api-key LASTFM_USER=your-user python3 scrape.py`
